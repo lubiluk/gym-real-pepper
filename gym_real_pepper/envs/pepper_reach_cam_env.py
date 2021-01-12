@@ -159,11 +159,11 @@ class PepperReachCamEnv(gym.Env):
     def _get_observation(self):
         img_bottom = self._get_image(self._cam_bottom)
         joint_p = self._motion_service.getAngles(CONTROLLABLE_JOINTS, True)
-        joint_v = [0.0] * len(CONTROLLABLE_JOINTS)
+        # joint_v = [0.0] * len(CONTROLLABLE_JOINTS)
 
         result = {
             "camera_bottom": img_bottom,
-            "joints_state": np.concatenate([joint_p, joint_v]).astype(np.float32),
+            "joints_state": np.array(joint_p).astype(np.float32),
         }
 
         if self._top_camera:
