@@ -17,9 +17,9 @@ print("=== Reset === {}".format(end - start))
 
 start = time.time()
 for _ in range(100):
-    env.step([1.0] * 9)
+    env.step([1.0] * 9 + [0.3])
 for _ in range(100):
-    env.step([-1.0] * 9)
+    env.step([-1.0] * 9 + [0.3])
 end = time.time()
 print("=== Act1 === {}".format(end - start))
 
