@@ -80,7 +80,7 @@ class PepperEnv(gym.Env):
 
     def close(self):
         pass
-        # self._life_service.setState("enabled")
+        self._life_service.setState("enabled")
 
     def seed(self, seed=None):
         np.random.seed(seed or 0)
@@ -92,15 +92,15 @@ class PepperEnv(gym.Env):
         rescaled = [
             self._rescale_feature(i, f) for (i, f) in enumerate(action)
         ]
-        angles = rescaled[:-1]
-        speed = rescaled[-1]
+        angles = list(rescaled[:-1])
+        speed = list(rescaled[-1])
         self._motion_service.setAngles(self.CONTROLLABLE_JOINTS, angles,
                                        [speed] * len(angles))
 
         time.sleep(self._sim_steps * 1. / 240.)
 
     def _setup_scene(self):
-        # self._life_service.setState("disabled")
+        self._life_service.setState("disabled")
         self._posture_service.goToPosture("StandInit", 0.5)
         self._motion_service.setStiffnesses("Body", 1.0)
 
@@ -132,6 +132,7 @@ class PepperEnv(gym.Env):
 
     def _get_image(self, camera_id):
         img = self._video_service.getImageRemote(camera_id)
+        
         imageWidth = img[0]
         imageHeight = img[1]
         array = img[6]

@@ -27,7 +27,7 @@ class PepperReachCamEnv(PepperEnv):
                              head_motion=head_motion)
 
     def close(self):
-        self._video_service.unsubscribe(self._cam_bottom)
+        self._video_service.unsubscribe(self._cam)
 
     def reset(self):
         self._reset_scene()
