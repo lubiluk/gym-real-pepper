@@ -92,8 +92,8 @@ class PepperEnv(gym.Env):
         rescaled = [
             self._rescale_feature(i, f) for (i, f) in enumerate(action)
         ]
-        angles = list(rescaled[:-1])
-        speed = list(rescaled[-1])
+        angles = rescaled[:-1]
+        speed = rescaled[-1]
         self._motion_service.setAngles(self.CONTROLLABLE_JOINTS, angles,
                                        [speed] * len(angles))
 
